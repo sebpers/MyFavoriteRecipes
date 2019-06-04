@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Recipe = require('./recipe.js');
+const Recipe = require('./recipes.js');
 
 //comment 
 const uri = process.env.DATABASE_URL || 'mongodb://localhost:27017/recipes'; 

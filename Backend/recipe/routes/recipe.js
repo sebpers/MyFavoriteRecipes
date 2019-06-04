@@ -1,7 +1,7 @@
 get = (req, res, next) => {
   let test = {
     recipe: {
-      title: Curry,
+      title: 'Curry',
       ingredients: [{
         ingredient: ['Potatis'],
         amount: [6],
@@ -9,7 +9,9 @@ get = (req, res, next) => {
       }]
     },
   };
-     res.send(test);
+
+  res.append('Custom-response-header', "yep");
+  res.send(test);
   // var query;
   // console.log(req.query.name);
 
