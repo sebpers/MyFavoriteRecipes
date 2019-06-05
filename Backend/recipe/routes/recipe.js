@@ -1,14 +1,23 @@
 get = (req, res, next) => {
-  let test = {
-    recipe: {
-      title: 'Curry',
-      ingredients: [{
-        ingredient: ['Potatis'],
-        amount: [6],
-        unit: ['st'],
-      }]
-    },
-  };
+  const test = [
+     {
+         title: 'Curry',
+         ingredients: [{
+           name: 'Potatis',
+           amount: 6,
+           unit: 'st'
+         },{
+          name: 'kikärtor',
+            amount: 4,
+            unit: 'dl'
+          }, {
+            name: 'mango',
+            amount: 3,
+            unit: 'st'
+          }
+        ]
+     },
+  ];
 
   res.append('Custom-response-header', "yep");
   res.send(test);
