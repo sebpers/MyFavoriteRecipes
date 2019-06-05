@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <navbar></navbar>
     <Index :recipes="recipes"/>
   </div>
 </template>
 
 <script>
-import Index from './components/index.vue'
+import Index from './components/index.vue';
+import navbar from './components/navbar';
 
 export default {
   name: 'app',
   components: {
-    Index
+    Index,
+    navbar
   },
   data() {
     return {
@@ -42,7 +45,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #8ACD83;
+  height: 100vh;
 }
 </style>
