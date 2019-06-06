@@ -17,23 +17,23 @@ get = (req, res, next) => {
           }
         ]
      },
-     {
-      title: 'Lasagne',
-      ingredients: [{
-        name: 'Potatis',
-        amount: 6,
-        unit: 'st'
-      },{
-       name: 'kikärtor',
-         amount: 4,
-         unit: 'dl'
-       }, {
-         name: 'mango',
-         amount: 3,
-         unit: 'st'
-       }
-     ]
-  }
+  //    {
+  //     title: 'Lasagne',
+  //     ingredients: [{
+  //       name: 'Potatis',
+  //       amount: 6,
+  //       unit: 'st'
+  //     },{
+  //      name: 'kikärtor',
+  //        amount: 4,
+  //        unit: 'dl'
+  //      }, {
+  //        name: 'mango',
+  //        amount: 3,
+  //        unit: 'st'
+  //      }
+  //    ]
+  // }
      
   ];
 

@@ -29,3 +29,5 @@ db.connectDb().then(()=>{
     console.info(`Server is listening on port ${listener.address().port}.`);
   });
 });
+
+module.exports = app;
