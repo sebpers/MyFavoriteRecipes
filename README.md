@@ -50,9 +50,9 @@
 
 ###### 5. Vad innebär TDD och BDD?
 
-- TDD står för "Test driven developer" och innebär att man skriver testerna först och sedan sin kod, vilket gör att man bryter ner problemen i små testdelar.
+- TDD står för "Test driven developer" och innebär att man skriver testerna först och sedan sin kod, vilket gör att man bryter ner problemen/kod i mindre delar vilket gör att koden blir enklare att förstå.
 
-- BDD (Behaviour Driven Developer) är en agil testmetod som uppmanar till sammarbete mellan utvecklare, tester med enbart text som kan förstås av gemeneman.
+- BDD (Behaviour Driven Developer) är en agil testmetod som uppmanar till sammarbete mellan utvecklare, tester med enbart text som kan förstås av gemeneman. Se nedan.
 
 ```
 Given that a customer previously bought a black sweater from me
