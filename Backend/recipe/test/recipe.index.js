@@ -43,7 +43,8 @@ describe('Recipe Integration tests', () => {
            amount: 3,
            unit: 'st'
          }
-       ]
+			 ],
+			 description: 'This description is for this dish!'
     }
 
 	describe('recipes.get', ()  => {

@@ -10,11 +10,11 @@ router.use(function timelog(req, res, next) {
 });
 
 // routes for recipes
-router.get('/recipes', recipe.get);
-router.get('/recipes/:id', recipe.getById);
-router.post('/recipes', recipe.post);
-router.put('/recipes/:id', recipe.put);
-router.delete('/recipes/:id', recipe.deleteById);
+router.get('/favoriterecipes', recipe.get);
+router.get('/favoriterecipes/:id', recipe.getById);
+router.post('/favoriterecipes', recipe.post);
+router.put('/favoriterecipes/:id', recipe.put);
+router.delete('/favoriterecipes/:id', recipe.deleteById);
 
 
 

@@ -1,57 +1,7 @@
 get = (req, res, next) => {
-  const test = [
-     {
-         title: 'Curry',
-         ingredients: [{
-           name: 'Potatis',
-           amount: 6,
-           unit: 'st'
-         },{
-          name: 'kikärtor',
-            amount: 4,
-            unit: 'dl'
-          }, {
-            name: 'mango',
-            amount: 3,
-            unit: 'st'
-          }
-        ]
-     },
-  //    {
-  //     title: 'Lasagne',
-  //     ingredients: [{
-  //       name: 'Potatis',
-  //       amount: 6,
-  //       unit: 'st'
-  //     },{
-  //      name: 'kikärtor',
-  //        amount: 4,
-  //        unit: 'dl'
-  //      }, {
-  //        name: 'mango',
-  //        amount: 3,
-  //        unit: 'st'
-  //      }
-  //    ]
-  // }
-     
-  ];
-
-  res.append('Custom-response-header', "yep");
-  res.send(test);
-  // var query;
-  // console.log(req.query.name);
-
-  // if (req.query.name) {
-  //   query = req.models.Recipe.findOne({
-  //     "recipe.name": req.query.name
-  //   });
-  // } else {
-  //   query = req.models.Recipe.find();
-  // };
-  // query.exec().then((recipe) => {
-  //   return res.send(recipe);
-  // }).catch((error) => next(error));
+ req.models.Recipe.find().then((recipe) => {
+    return res.send(recipe);
+  }).catch((error) => next(error));
 };
 
 getById = (req, res, next) => {
@@ -62,22 +12,45 @@ getById = (req, res, next) => {
 
 
 post = (req, res, next) => {
-  req.models.Recipe.create(
-    {
-      // recipe: {
-      //   address: {
-      //     street: req.body.recipe.address.street,
-      //     zipCode: req.body.recipe.address.zipCode,
-      //     city: req.body.recipe.address.city
-      //   },
-      //   email: req.body.recipe.email,
-      //   name: req.body.recipe.name
-      // },
+      console.log(req.models.Recipe);
+      
+    for (let i = 0; i< 5; i++) {
+    req.models.Recipe.create({
+      title: req.body.title,
+      ingredients: [{
+          name: req.body.ingredients[0].name,
+          amount: req.body.ingredients[0].amount,
+          unit: req.body.ingredients[0].unit
+        },
+        {
+          name: req.body.ingredients[1].name,
+          amount: req.body.ingredients[1].amount,
+          unit: req.body.ingredients[1].unit
+        },
+         {
+           name: req.body.ingredients[2].name,
+           amount: req.body.ingredients[2].amount,
+           unit: req.body.ingredients[2].unit
+         },
+          {
+            name: req.body.ingredients[3].name,
+            amount: req.body.ingredients[3].amount,
+            unit: req.body.ingredients[3].unit
+          },
+           {
+             name: req.body.ingredients[4].name,
+             amount: req.body.ingredients[4].amount,
+             unit: req.body.ingredients[4].unit
+           }
+      ],
+      description: req.body.description
+    }).then((recipe) => {
+      console.log(recipe);
+      return res.status(201).send(recipe);
+    }).catch((error) => next(error));
+      
     }
-  ).then((recipe) => {
-    console.log(recipe);
-    return res.status(201).send(recipe);
-  }).catch((error) => next(error));
+      
 };
 
 
@@ -85,15 +58,15 @@ put = (req, res, next) => {
   req.models.Recipe.updateOne({
     _id: req.params.id
   }, {
-      // recipe: {
-      //   address: {
-      //     street: req.body.recipe.address.street,
-      //     zipCode: req.body.recipe.address.zipCode,
-      //     city: req.body.recipe.address.city
-      //   },
-      //   email: req.body.recipe.email,
-      //   name: req.body.recipe.name
-      // },
+      recipe: {
+        address: {
+          street: req.body.recipe.address.street,
+          zipCode: req.body.recipe.address.zipCode,
+          city: req.body.recipe.address.city
+        },
+        email: req.body.recipe.email,
+        name: req.body.recipe.name
+      },
     }, {
       new: true,
       upsert: true,
