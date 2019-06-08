@@ -50,7 +50,7 @@ export default {};
 .wrap {
     background-color: whitesmoke;
     width: 60vw;
-    height: auto;
+    height: 100vh;
     margin-left: 50%;
     transform: translate(-50%);
     display: flex;

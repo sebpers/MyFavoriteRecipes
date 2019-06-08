@@ -2,9 +2,6 @@
     <div class="wrapper">
         <table v-for="recipe in recipes" :key="recipe.id">
             <div class="recipeWrapper">
-                <div>
-                    <img src="https://placekitten.com/120/120" alt="The foods image">
-                </div>
                 <tbody>
                     <th>{{recipe.title}}</th>
                     <tr v-for="ingredient in recipe.ingredients" :key="ingredient.id">
@@ -15,6 +12,9 @@
                     <tr>
                         <td>{{recipe.description}}</td>
                     </tr>
+                    <!-- <div>
+                    <img src="https://placekitten.com/220/220" alt="The foods image">
+                </div> -->
                     <td id="button">
                         <button id="delete" @click="('deleteRecipe', recipe._id)">Delete</button>
                     </td>
@@ -70,7 +70,7 @@ export default {
 <style scoped>
 .wrapper {
     background-color: whitesmoke;
-    width: 60vw;
+    width: 100vw;
     height: auto;
     margin-left: 50%;
     transform: translate(-50%);
@@ -84,17 +84,20 @@ export default {
 .recipeWrapper {
     display: flex;
     border-radius: 3px;
-    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.2);
+    /* ändra skugga */
+    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
     min-height: 130px;
-    width: 500px;
+    width: 800px;
     margin-bottom: 10px;
-    border: 1px solid #8acd83;
+    /* border: 1px solid #8acd83; */
     padding: 20px;
 }
 
 img {
-    margin: 5px;
+    margin: 15px;
     padding-right: 20px;
+    margin-top: 20%;
+
 }
 
 table {

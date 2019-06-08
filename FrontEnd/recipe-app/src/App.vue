@@ -19,7 +19,7 @@ export default {
 
 <style>
 #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-family: "PT-Sans", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
@@ -27,8 +27,10 @@ export default {
     padding: 0;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: #8acd83;
+    /* background-color: #8acd83; */
     height: auto;
+    background-color: whitesmoke;
+
 }
 .router {
     margin-top: 70px;
