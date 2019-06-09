@@ -16,7 +16,7 @@
                     <img src="https://placekitten.com/220/220" alt="The foods image">
                 </div> -->
                     <td id="button">
-                        <button id="delete" @click="('deleteRecipe', recipe._id)">Delete</button>
+                        <button id="delete" @click="deleteById(recipe._id)">Delete</button>
                     </td>
                 </tbody>
             </div>
@@ -54,6 +54,8 @@ export default {
         },
 
         async deleteById(id) {
+            console.log();
+            
             try {
                 await fetch(`http://localhost:3000/favoriterecipes/` + id, {
                     method: "DELETE"
