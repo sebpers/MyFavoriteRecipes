@@ -2,8 +2,8 @@
     <div class="navbarWrapper">
         <div class="textHeader">
             <router-link class="link" to="/">
-                <h1>Vegan 🥗 Vegetarian Recipies</h1>
-                  <p class="subHeader">Only five ingredients and a dish in less then 15min</p>
+                <h1>Vegan 🥗 Vegetarian Recipes</h1>
+                  <p class="subHeader">Only five ingredients and a dish in less than 15min</p>
             </router-link>
         </div>
 
@@ -15,7 +15,7 @@
                 </li>-->
            
                     <router-link class="link addRecipe"  to="/addRecipe">
-                        <i id="loginIcon" class="material-icons">add_circle</i>
+                        <i class="material-icons">add_circle</i>
                         <p> Recipe</p>
                     </router-link>
                 
@@ -25,8 +25,10 @@
 
 <script>
 export default {
-    name: "navbar"
+    name: "navbar",
 };
+
+
 
 </script>
 

@@ -12,9 +12,6 @@ getById = (req, res, next) => {
 
 
 post = (req, res, next) => {
-      console.log(req.models.Recipe);
-      
-    for (let i = 0; i< 5; i++) {
     req.models.Recipe.create({
       title: req.body.title,
       ingredients: [{
@@ -47,10 +44,7 @@ post = (req, res, next) => {
     }).then((recipe) => {
       console.log(recipe);
       return res.status(201).send(recipe);
-    }).catch((error) => next(error));
-      
-    }
-      
+    }).catch((error) => next(error));  
 };
 
 

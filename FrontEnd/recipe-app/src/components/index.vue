@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <table v-for="recipe in recipes" :key="recipe.id">
+        <table v-for="recipe in recipes" :key="recipe.id" >
             <div class="recipeWrapper">
                 <tbody>
                     <th>{{recipe.title}}</th>
@@ -15,8 +15,9 @@
                     <!-- <div>
                     <img src="https://placekitten.com/220/220" alt="The foods image">
                 </div> -->
-                    <td id="button">
-                        <button id="delete" @click="deleteById(recipe._id)">Delete</button>
+                    <td id="button" >
+                        <a id="delete" @click="deleteById(recipe._id)"><i id="delete" class="material-icons">delete</i></a>
+                     
                     </td>
                 </tbody>
             </div>
@@ -30,7 +31,8 @@ export default {
 
     data() {
         return {
-            recipes: []
+            recipes: [],
+
         };
     },
 
@@ -39,6 +41,7 @@ export default {
     },
 
     methods: {
+    
         // Ascynchronous call for fetch
         async getRecipe() {
             try {
@@ -70,6 +73,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#delete{
+    color:crimson;
+    cursor: pointer;
+}
+#delete:hover{
+    transform: scale(1.2)
+}
+
 .wrapper {
     background-color: whitesmoke;
     width: 100vw;
