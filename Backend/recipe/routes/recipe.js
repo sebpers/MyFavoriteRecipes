@@ -14,32 +14,7 @@ getById = (req, res, next) => {
 post = (req, res, next) => {
     req.models.Recipe.create({
       title: req.body.title,
-      ingredients: [{
-          name: req.body.ingredients[0].name,
-          amount: req.body.ingredients[0].amount,
-          unit: req.body.ingredients[0].unit
-        },
-        {
-          name: req.body.ingredients[1].name,
-          amount: req.body.ingredients[1].amount,
-          unit: req.body.ingredients[1].unit
-        },
-         {
-           name: req.body.ingredients[2].name,
-           amount: req.body.ingredients[2].amount,
-           unit: req.body.ingredients[2].unit
-         },
-          {
-            name: req.body.ingredients[3].name,
-            amount: req.body.ingredients[3].amount,
-            unit: req.body.ingredients[3].unit
-          },
-           {
-             name: req.body.ingredients[4].name,
-             amount: req.body.ingredients[4].amount,
-             unit: req.body.ingredients[4].unit
-           }
-      ],
+      ingredients: req.body.ingredients,
       description: req.body.description
     }).then((recipe) => {
       console.log(recipe);
@@ -53,32 +28,7 @@ put = (req, res, next) => {
     _id: req.params.id
   }, {
     title: req.body.title,
-    ingredients: [{
-        name: req.body.ingredients[0].name,
-        amount: req.body.ingredients[0].amount,
-        unit: req.body.ingredients[0].unit
-      },
-      {
-        name: req.body.ingredients[1].name,
-        amount: req.body.ingredients[1].amount,
-        unit: req.body.ingredients[1].unit
-      },
-      {
-        name: req.body.ingredients[2].name,
-        amount: req.body.ingredients[2].amount,
-        unit: req.body.ingredients[2].unit
-      },
-      {
-        name: req.body.ingredients[3].name,
-        amount: req.body.ingredients[3].amount,
-        unit: req.body.ingredients[3].unit
-      },
-      {
-        name: req.body.ingredients[4].name,
-        amount: req.body.ingredients[4].amount,
-        unit: req.body.ingredients[4].unit
-      }
-    ],
+    ingredients: req.body.ingredients,
     description: req.body.description
   }, {
       new: true,
