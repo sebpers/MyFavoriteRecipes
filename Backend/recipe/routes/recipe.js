@@ -52,16 +52,35 @@ put = (req, res, next) => {
   req.models.Recipe.updateOne({
     _id: req.params.id
   }, {
-      recipe: {
-        address: {
-          street: req.body.recipe.address.street,
-          zipCode: req.body.recipe.address.zipCode,
-          city: req.body.recipe.address.city
-        },
-        email: req.body.recipe.email,
-        name: req.body.recipe.name
+    title: req.body.title,
+    ingredients: [{
+        name: req.body.ingredients[0].name,
+        amount: req.body.ingredients[0].amount,
+        unit: req.body.ingredients[0].unit
       },
-    }, {
+      {
+        name: req.body.ingredients[1].name,
+        amount: req.body.ingredients[1].amount,
+        unit: req.body.ingredients[1].unit
+      },
+      {
+        name: req.body.ingredients[2].name,
+        amount: req.body.ingredients[2].amount,
+        unit: req.body.ingredients[2].unit
+      },
+      {
+        name: req.body.ingredients[3].name,
+        amount: req.body.ingredients[3].amount,
+        unit: req.body.ingredients[3].unit
+      },
+      {
+        name: req.body.ingredients[4].name,
+        amount: req.body.ingredients[4].amount,
+        unit: req.body.ingredients[4].unit
+      }
+    ],
+    description: req.body.description
+  }, {
       new: true,
       upsert: true,
       runvalidators: true,
