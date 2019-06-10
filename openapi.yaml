@@ -1,0 +1,196 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: My favorit recipes
+  description: |
+    An api that implements recipes from user posts and saves it into mongoDb.
+     
+    
+    The purpose of this API is to let user share their recipes with others.
+     
+    license:
+    name: MIT
+servers:
+- url: http://localhost:3000
+paths:
+  /favoriterecipes:
+    get:
+      summary: List recipes
+      # operationId: listPosts
+      tags:
+      - recipes
+      parameters:
+      - name: recipeId
+        in: query
+        description: filter by recipe id
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Array of recipes
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ResponseRecepies"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a Recepie
+      operationId: createRecepie
+      tags:
+      - recepies
+      requestBody:
+        description: the recepie to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recepie'
+      responses:
+        '201':
+          description: The created recepie
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ResponseRecepie"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /favoriterecipes/{recepieId}:
+    get:
+      summary: Get a Recepie
+      operationId: getRecepie
+      tags:
+        - recepies
+      parameters:
+      - name: recepieId
+        in: path
+        description: recepie id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The found recepie
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ResponseRecepie"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Replace a Recepie
+      operationId: putRecepie
+      tags:
+      - recepies
+      parameters:
+      - name: recepieId
+        in: path
+        description: recepie id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: the recepie to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recepie'
+      responses:
+        '200':
+          description: The replaced recepie
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ResponseRecepie"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a Recepie
+      operationId: deleteRecepie
+      tags:
+        - recepies
+      parameters:
+      - name: recepieId
+        in: path
+        description: recipe id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The deleted recepie
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/ResponseRecepie"
+        '204':
+          description: No change (nothing was deleted)
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Recepie:
+      type: object
+      properties:
+        title:
+          type: string
+        ingredients:
+          type: array
+          items:
+            properties:
+              name:
+               type: string
+              amount:
+               type: integer
+              unit:
+                type: string
+        description:
+          type: string
+    ResponseRecepie:
+      allOf:
+      - $ref: "#/components/schemas/Recepie"
+      - properties:
+          id:
+            type: integer
+          _id:
+            type: string
+            format: uuid
+    ResponseRecepies:
+      type: array
+      items:
+        $ref: "#/components/schemas/ResponseRecepie"
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
