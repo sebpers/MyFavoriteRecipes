@@ -2,8 +2,9 @@
     <div class="wrapper">
         <table v-for="recipe in recipes" :key="recipe.id" >
             <div class="recipeWrapper">
+                <h1>{{recipe.title}}</h1>
                 <tbody>
-                    <th>{{recipe.title}}</th>
+                    
                     <tr v-for="ingredient in recipe.ingredients" :key="ingredient.id">
                         <td>{{ingredient.amount}} {{ingredient.unit}}</td>
                         <td>{{ingredient.name}}</td>
@@ -97,7 +98,8 @@ export default {
 .recipeWrapper {
     display: flex;
     border-radius: 3px;
-    /* ändra skugga */
+    flex-direction: column
+    /* ändra skugga */;
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
     min-height: 130px;
     width: 800px;
@@ -120,9 +122,10 @@ table {
     /* box-shadow: 0 14px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.05); */
 }
 
-th {
-    color: brown;
-    padding: 10px 3px 3px 10px;
+h1 {
+    color: rgb(216, 118, 83);
+    padding: 5px 3px 3px 5px;
+    font-size: 18px;
 }
 
 td {
