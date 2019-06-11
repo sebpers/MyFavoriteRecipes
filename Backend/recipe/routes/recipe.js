@@ -2,18 +2,18 @@ get = (req, res, next) => {
   var query;
 
   if(req.query.title) {
-    query = req.models.Recipe.find({title: req.query.title})
+    query = req.models.Recipe.find({title: req.query.title});
   }
   else
   {
-    query = req.models.Recipe.find()
+    query = req.models.Recipe.find();
   }
 
   query.exec().then((recipe) => {
       return res.send(recipe);
     }).catch((error) => {
-      next(error)
-    })
+      next(error);
+    });
 };
 
 getById = (req, res, next) => {
