@@ -1,7 +1,19 @@
 get = (req, res, next) => {
- req.models.Recipe.find().then((recipe) => {
-    return res.send(recipe);
-  }).catch((error) => next(error));
+  var query;
+
+  if(req.query.title) {
+    query = req.models.Recipe.find({title: req.query.title})
+  }
+  else
+  {
+    query = req.models.Recipe.find()
+  }
+
+  query.exec().then((recipe) => {
+      return res.send(recipe);
+    }).catch((error) => {
+      next(error)
+    })
 };
 
 getById = (req, res, next) => {
@@ -9,7 +21,6 @@ getById = (req, res, next) => {
     return res.send(recipe);
   }).catch((error) => next(error));
 };
-
 
 post = (req, res, next) => {
     req.models.Recipe.create({
@@ -19,8 +30,9 @@ post = (req, res, next) => {
     }).then((recipe) => {
       console.log(recipe);
       return res.status(201).send(recipe);
-    }).catch((error) => next(error));  
+    }).catch((error) => next(error));
 };
+
 
 put = (req, res, next) => {
   req.models.Recipe.updateOne({
@@ -63,3 +75,6 @@ module.exports = {
   getById,
   deleteById,
 };
+
+
+
