@@ -11,17 +11,12 @@
         @keypress="clearStatus"
       >
     <div class="labelIngredients">
-        <label id="ingredient">Ingredients {{ index }}</label>
+        <label id="ingredient">Ingredients</label>
         <label class="amountUnit">Amount</label>
         <label class="amountUnit">Unit</label>
+        <i id="addRecepie" class="material-icons" @click="addIngrediensField()">add_circle</i>
     </div>
-    <div id="ingredients" v-for="newIngredient in newRecipe.recipe.ingredients"              :key="newIngredient.id">
-        <!-- <div class="labelIngredients">
-            <label id="ingredient">Ingredients {{ index }}</label>
-            <label class="amountUnit">Amount</label>
-            <label class="amountUnit">Unit</label>
-        </div> -->
-
+    <div id="ingredients" v-for="(newIngredient, index) in newRecipe.recipe.ingredients" :key="newIngredient.id">
       <input
         id="ingredientName"
         v-model="newIngredient.name"
@@ -32,25 +27,28 @@
       >
 
       <input
-      id="ingredientAmount"
-          v-model="newIngredient.amount"
-          type="number"
-          placeholder="Enter amount.."
-          min="0"
-          :class="{ 'has-error': submitting && invalidIngredientsAmount }"
-          @focus="clearStatus"
-          >
-
-    <input
-        id="ingredientUnit"
-        v-model="newIngredient.unit"
-        type="text"
-        placeholder="Enter unit.."
-        :class="{ 'has-error': submitting && invalidIngredientsUnit }"
+        id="ingredientAmount"
+        class="inputFlex"
+        v-model="newIngredient.amount"
+        type="number"
+        placeholder="0"
+        min="0"
+        :class="{ 'has-error': submitting && invalidIngredientsAmount }"
         @focus="clearStatus"
-    >
-    <i id="addRecepie" class="material-icons" @click="addIngrediensField()">add_circle</i>
-</div>
+        >
+
+        <input
+            id="ingredientUnit"
+            class="inputFlex"
+            placeholder="Unit.."
+            v-model="newIngredient.unit"
+            type="text"
+            :class="{ 'has-error': submitting && invalidIngredientsUnit }"
+            @focus="clearStatus"
+        >
+        <i id="removeRecepie" class="material-icons" @click="removeIngredient(index)">remove_circle</i>
+
+    </div>
         <label>Description</label>
          <textarea 
           v-model="newRecipe.recipe.description" 
@@ -122,6 +120,11 @@ export default {
             unit: ""
         });
     },
+    removeIngredient(index) {
+        console.log(index)
+        this.newRecipe.recipe.ingredients.splice(index, 1);
+    },
+
     handleSubmit() {
       this.submitting = true;
       this.clearStatus();
@@ -213,14 +216,28 @@ input {
 
 #ingredients {
     display: flex;
-    
+    width: 400px;
+}
+
+.labelIngredients {
+    display: flex;
+    justify-content: space-between;
+}
+
+#ingredientName {
+    width: 60%;
+}
+
+.inputFlex {
+    width: 20%;
 }
 
 #addRecepie {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
+    color: green;
+}
+
+#removeRecepie {
+    color: red;
 }
 
 textarea {
