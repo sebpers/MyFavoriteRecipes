@@ -42,7 +42,6 @@ export default {
     },
 
     methods: {
-    
         // Ascynchronous call for fetch
         async getRecipe() {
             try {
@@ -57,9 +56,7 @@ export default {
             }
         },
 
-        async deleteById(id) {
-            console.log();
-            
+        async deleteById(id) {   
             try {
                 await fetch(`http://localhost:3000/favoriterecipes/` + id, {
                     method: "DELETE"

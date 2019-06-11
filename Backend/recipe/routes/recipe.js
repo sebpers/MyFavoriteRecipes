@@ -22,7 +22,6 @@ post = (req, res, next) => {
     }).catch((error) => next(error));  
 };
 
-
 put = (req, res, next) => {
   req.models.Recipe.updateOne({
     _id: req.params.id

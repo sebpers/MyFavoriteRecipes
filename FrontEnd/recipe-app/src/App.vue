@@ -26,9 +26,9 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-x: hidden;
     /* background-color: #8acd83; */
-    height: auto;
+    height: 100vh;
     background-color: whitesmoke;
 
 }
