@@ -3,7 +3,7 @@
         <div class="textHeader">
             <router-link class="link" to="/">
                 <h1>Vegan 🥗 Vegetarian Recipes</h1>
-                  <p class="subHeader">Only five ingredients and a dish in less than 15min</p>
+                  <!-- <p class="subHeader">Only five ingredients and a dish in less than 15min</p> -->
             </router-link>
         </div>
 
@@ -13,12 +13,10 @@
           <i id="loginIcon" class="material-icons">account_circle</i>
           Login
                 </li>-->
-           
                     <router-link class="link addRecipe"  to="/addRecipe">
                         <i class="material-icons">add_circle</i>
-                        <p> Recipe</p>
+                        <p id="recipeText">Recipe</p>
                     </router-link>
-                
         </div>
     </div>
 </template>
@@ -69,9 +67,15 @@ export default {
     align-items: center; 
     position: fixed;
     right: 100px;
-    top: 140px;
+    top: 165px;
+}
+#recipeText {
+    margin-top: 15px;
 }
 
+#recipeText:hover {
+    text-decoration: underline;
+}
 
 .link {
     text-decoration: none;

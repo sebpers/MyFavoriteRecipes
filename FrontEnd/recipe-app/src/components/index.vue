@@ -1,10 +1,12 @@
 <template>
     <div class="wrapper">
-        <table v-for="recipe in recipes" :key="recipe.id" >
+        <input id="searchField" type="text" v-model="search" placeholder="Search title.."/>
+
+        <table v-for="recipe in filteredRecipes" :key="recipe.id" >
             <div class="recipeWrapper">
-                <h1>{{recipe.title}}</h1>
+                <small id="edit" @click="editRecipe(recipe._id)" v-b-tooltip.hover title="Edit recipe">Edit</small>
+                <h1>{{ recipe.title }}</h1>
                 <tbody>
-                    
                     <tr v-for="ingredient in recipe.ingredients" :key="ingredient.id">
                         <td>{{ingredient.amount}} {{ingredient.unit}}</td>
                         <td>{{ingredient.name}}</td>
@@ -17,13 +19,12 @@
                     <img src="https://placekitten.com/220/220" alt="The foods image">
                 </div> -->
                     <td id="button" >
-                        <a id="delete" @click="deleteById(recipe._id)"><i id="delete" class="material-icons">delete</i></a>
-                     
+                        <a id="delete" @click="deleteById(recipe._id)"><i id="delete" class="material-icons" v-b-tooltip.hover title="Delete recipe">delete</i></a>
                     </td>
                 </tbody>
             </div>
         </table>
-    </div>
+         </div>
 </template>
 
 <script>
@@ -33,10 +34,9 @@ export default {
     data() {
         return {
             recipes: [],
-
+            search: ''
         };
     },
-
     mounted() {
         this.getRecipe();
     },
@@ -55,8 +55,7 @@ export default {
                 console.log(error);
             }
         },
-
-        async deleteById(id) {   
+        async deleteById(id) {
             try {
                 await fetch(`http://localhost:3000/favoriterecipes/` + id, {
                     method: "DELETE"
@@ -64,8 +63,30 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        },
+        async editRecipe(id) {
+        console.log(id)
+            // try {
+            //     const response = await fetch("http://localhost:3000/favoriterecipes/" + id, {
+            //     method: "PUT",
+            //     body: JSON.stringify(updatedRecipe),
+            //     headers: { "Content-type": "application/json; charset=UTF-8" }
+            //     });
+            //     const data = await response.json();
+            //     console.log(data);
+            // } catch (error) {
+            //     console.error(error);
+            // }
         }
-    }
+    },
+      computed: {
+            filteredRecipes: function() {
+                // console.log(recipe.title)
+                return this.recipes.filter((recipe) => {
+                    return recipe.title.match(this.search) || recipe.title.toLowerCase().match(this.search) || recipe.title.toUpperCase().match(this.search);
+                });
+            }
+        }
 };
 </script>
 
@@ -89,7 +110,7 @@ export default {
     flex-direction: column;
     align-items: center;
     border-radius: 3px;
-    padding-top: 120px;
+    padding-top: 50px;
 }
 
 .recipeWrapper {
@@ -105,11 +126,17 @@ export default {
     padding: 20px;
 }
 
+#searchField {
+    margin: 25px 25px 30px 25px;
+    width: 400px;
+    padding: 2px;
+    outline-color: rgb(216, 118, 83);
+}
+
 img {
     margin: 15px;
     padding-right: 20px;
     margin-top: 20%;
-
 }
 
 table {
@@ -123,6 +150,15 @@ h1 {
     color: rgb(216, 118, 83);
     padding: 5px 3px 3px 5px;
     font-size: 18px;
+}
+
+small {
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+small:hover {
+    text-decoration: underline;
 }
 
 td {

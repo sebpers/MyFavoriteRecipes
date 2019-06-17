@@ -10,48 +10,49 @@
         @focus="clearStatus"
         @keypress="clearStatus"
       >
-    <div class="labelIngredients">
-        <label id="ingredient">Ingredients</label>
-        <label class="amountUnit">Amount</label>
-        <label class="amountUnit">Unit</label>
-        <i id="addRecepie" class="material-icons" @click="addIngrediensField()">add_circle</i>
-    </div>
-    <div id="ingredients" v-for="(newIngredient, index) in newRecipe.recipe.ingredients" :key="newIngredient.id">
-      <input
-        id="ingredientName"
-        v-model="newIngredient.name"
-        type="text"
-        placeholder="Enter ingredient.."
-        :class="{ 'has-error': submitting && invalidIngredientsName }"
-        @focus="clearStatus"
-      >
-
-      <input
-        id="ingredientAmount"
-        class="inputFlex"
-        v-model="newIngredient.amount"
-        type="number"
-        placeholder="0"
-        min="0"
-        :class="{ 'has-error': submitting && invalidIngredientsAmount }"
-        @focus="clearStatus"
+      <div class="labelIngredients">
+          <label id="ingredient">Ingredients</label>
+          <div id="amountUnitWrapper">
+            <label class="amountUnit">Amount</label>
+            <label class="amountUnit">Unit</label>
+          </div>
+          <i id="addRecepie" class="material-icons" @click="addIngrediensField()">add_circle</i>
+      </div>
+      <div id="ingredients" v-for="(newIngredient, index) in newRecipe.recipe.ingredients" :key="newIngredient.id">
+        <input
+          id="ingredientName"
+          v-model="newIngredient.name"
+          type="text"
+          placeholder="Enter ingredient.."
+          :class="{ 'has-error': submitting && invalidIngredientsName }"
+          @focus="clearStatus"
         >
 
         <input
-            id="ingredientUnit"
-            class="inputFlex"
-            placeholder="Unit.."
-            v-model="newIngredient.unit"
-            type="text"
-            :class="{ 'has-error': submitting && invalidIngredientsUnit }"
-            @focus="clearStatus"
+          id="ingredientAmount"
+          class="inputFlex"
+          v-model="newIngredient.amount"
+          type="number"
+          placeholder="0"
+          min="0"
+          :class="{ 'has-error': submitting && invalidIngredientsAmount }"
+          @focus="clearStatus"
+        >
+
+        <input
+          id="ingredientUnit"
+          class="inputFlex"
+          placeholder="Unit.."
+          v-model="newIngredient.unit"
+          type="text"
+          :class="{ 'has-error': submitting && invalidIngredientsUnit }"
+          @focus="clearStatus"
         >
         <i id="removeRecepie" class="material-icons" @click="removeIngredient(index)">remove_circle</i>
-
     </div>
         <label>Description</label>
-         <textarea 
-          v-model="newRecipe.recipe.description" 
+         <textarea
+          v-model="newRecipe.recipe.description"
           type="text"
           placeholder="Enter description.."
           :class="{ 'has-error': submitting && invalidDescription }"
@@ -103,6 +104,7 @@ export default {
   },
   methods: {
     async addRecipe(recipe) {
+      console.log(recipe)
       try {
         const response = await fetch("http://localhost:3000/favoriterecipes", {
           method: "POST",
@@ -142,7 +144,7 @@ export default {
         this.addRecipe(this.newRecipe.recipe);
       }
 
-
+      // Reset the inputfields in the form
       this.newRecipe = {
          recipe: {
           title: '',
@@ -198,7 +200,7 @@ export default {
 #recipe-form {
     width: 400px;
     background-color: red;
-    margin-top: 150px;
+    margin-top: 162px;
     margin-left: 50%;
     transform: translate(-50%);
 }
@@ -211,17 +213,36 @@ form {
 
 input {
     padding: 5px;
-    margin-bottom: 10px;
+    outline-color: rgb(216, 118, 83);
+    margin-bottom: 4px;
+}
+
+::placeholder {
+  font-size: small;
 }
 
 #ingredients {
     display: flex;
-    width: 400px;
+    width: 424px;
 }
 
 .labelIngredients {
     display: flex;
     justify-content: space-between;
+    margin-top: 3px;
+    width: 424px;
+}
+
+#amountUnitWrapper {
+  width: 30%;
+  margin-left: 29%;
+  display: flex;
+  justify-content: space-around
+}
+
+label {
+  margin-top: 8px;
+  margin-bottom: 2px;
 }
 
 #ingredientName {
@@ -234,16 +255,21 @@ input {
 
 #addRecepie {
     color: green;
+    cursor: pointer;
+    align-self: center;
 }
 
 #removeRecepie {
     color: red;
-}
+    cursor: pointer;
+    align-self:center;
+  }
 
 textarea {
     height: 300px;
     margin-bottom: 5px;
     padding: 5px;
+    outline-color: rgb(216, 118, 83);
 }
 
 [class*="-message"] {
