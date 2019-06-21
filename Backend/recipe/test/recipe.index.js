@@ -20,6 +20,7 @@ const Recipe = mongoose.model('Recipe');
 
 
 var userMock = sinon.mock(Recipe);
+
 beforeEach(() => {
 	console.log('beforeEach');
 	userMock.restore(); // Unwraps the spy
@@ -75,7 +76,7 @@ describe('Recipe Integration tests', () => {
   	__v: 0
   };
 
-  //Get 
+  //Get
 	describe('recipes.get', ()  => {
 
 		it('Should return an array of all recipes', (done) => {
@@ -86,7 +87,7 @@ describe('Recipe Integration tests', () => {
 			.chain('exec')
 			.resolves([expected]);
 
-			// When (someting happens)
+			// When (something happens)
 			agent
 			.get('/favoriterecipes')
 			.end((err,res) => {
