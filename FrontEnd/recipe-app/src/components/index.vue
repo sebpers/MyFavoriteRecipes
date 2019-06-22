@@ -7,11 +7,13 @@
                 <small id="edit" @click="editRecipe(recipe._id)" v-b-tooltip.hover title="Edit recipe">Edit</small>
                 <h1>{{ recipe.title }}</h1>
                 <tbody>
+                    <h2>Ingredients</h2>
                     <tr v-for="ingredient in recipe.ingredients" :key="ingredient.id">
                         <td>{{ingredient.amount}} {{ingredient.unit}}</td>
                         <td>{{ingredient.name}}</td>
                     </tr>
                     <hr>
+                    <h3>Description</h3>
                     <tr>
                         <td>{{recipe.description}}</td>
                     </tr>
@@ -149,7 +151,7 @@ table {
 h1 {
     color: rgb(216, 118, 83);
     padding: 5px 3px 3px 5px;
-    font-size: 18px;
+    /* font-size: 18px; */
 }
 
 small {
