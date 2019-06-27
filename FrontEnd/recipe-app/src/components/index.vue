@@ -98,6 +98,7 @@ export default {
                 body: JSON.stringify(recipe),
                 headers: { "Content-Type": "application/json; charset=UTF-8" }
                 });
+                //here we should have a validator for a cancel function check the tutorial lady
             } catch (error) {
                 console.error(error);
             }
