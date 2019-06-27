@@ -93,13 +93,11 @@ export default {
         async editRecipe(recipe) {
             console.log(recipe._id);
             try {
-                const response = await fetch("http://localhost:3000/favoriterecipes/" + recipe._id, {
+                const response = await fetch(`http://localhost:3000/favoriterecipes/` + recipe._id, {
                 method: "PUT",
                 body: JSON.stringify(recipe),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
+                headers: { "Content-Type": "application/json; charset=UTF-8" }
                 });
-                const data = await response.json();
-                console.log(data);
             } catch (error) {
                 console.error(error);
             }
