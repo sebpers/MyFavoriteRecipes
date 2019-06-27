@@ -1,11 +1,27 @@
 <template>
     <div class="wrapper">
-        <input id="searchField" type="text" v-model="search" placeholder="Search title.."/>
+        <input id="searchField" type="text" v-model="search" placeholder="Search title..">
 
-        <table v-for="recipe in filteredRecipes" :key="recipe.id" >
+        <table v-for="recipe in filteredRecipes" :key="recipe.id">
             <div class="recipeWrapper">
-                <small id="edit" @click="editRecipe(recipe._id)" v-b-tooltip.hover title="Edit recipe">Edit</small>
-                <h1>{{ recipe.title }}</h1>
+                <small 
+                    v-if="editing === recipe._id"
+                    @click="editRecipeOne(recipe)"
+                    v-b-tooltip.hover
+                    title="Save recipe"
+                >Save</small>
+                <small 
+                    v-else 
+                    @click="editMode(recipe._id)"
+                    v-b-tooltip.hover
+                    title="Edit recipe"
+                >Edit</small>
+
+                <h1 v-if="editing === recipe._id">
+                    <input type="text" v-model="recipe.title" />
+                </h1>
+                <h1 v-else >{{ recipe.title }}</h1>
+                
                 <tbody>
                     <h2>Ingredients</h2>
                     <tr v-for="ingredient in recipe.ingredients" :key="ingredient.id">
@@ -19,14 +35,21 @@
                     </tr>
                     <!-- <div>
                     <img src="https://placekitten.com/220/220" alt="The foods image">
-                </div> -->
-                    <td id="button" >
-                        <a id="delete" @click="deleteById(recipe._id)"><i id="delete" class="material-icons" v-b-tooltip.hover title="Delete recipe">delete</i></a>
+                    </div>-->
+                    <td id="button">
+                        <a id="delete" @click="deleteById(recipe._id)">
+                            <i
+                                id="delete"
+                                class="material-icons"
+                                v-b-tooltip.hover
+                                title="Delete recipe"
+                            >delete</i>
+                        </a>
                     </td>
                 </tbody>
             </div>
         </table>
-         </div>
+    </div>
 </template>
 
 <script>
@@ -36,7 +59,8 @@ export default {
     data() {
         return {
             recipes: [],
-            search: ''
+            search: "", 
+            editing: null
         };
     },
     mounted() {
@@ -51,7 +75,7 @@ export default {
                     "http://localhost:3000/favoriterecipes"
                 );
                 const data = await response.json();
-                this.recipes = data;
+                this.recipes = data.reverse();
                 console.log(data);
             } catch (error) {
                 console.log(error);
@@ -66,40 +90,53 @@ export default {
                 console.log(error);
             }
         },
-        async editRecipe(id) {
-        console.log(id)
-            // try {
-            //     const response = await fetch("http://localhost:3000/favoriterecipes/" + id, {
-            //     method: "PUT",
-            //     body: JSON.stringify(updatedRecipe),
-            //     headers: { "Content-type": "application/json; charset=UTF-8" }
-            //     });
-            //     const data = await response.json();
-            //     console.log(data);
-            // } catch (error) {
-            //     console.error(error);
-            // }
-        }
-    },
-      computed: {
-            filteredRecipes: function() {
-                // console.log(recipe.title)
-                return this.recipes.filter((recipe) => {
-                    return recipe.title.match(this.search) || recipe.title.toLowerCase().match(this.search) || recipe.title.toUpperCase().match(this.search);
+        async editRecipe(recipe) {
+            console.log(recipe._id);
+            try {
+                const response = await fetch("http://localhost:3000/favoriterecipes/" + recipe._id, {
+                method: "PUT",
+                body: JSON.stringify(recipe),
+                headers: { "Content-type": "application/json; charset=UTF-8" }
                 });
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error(error);
             }
+        },
+    editMode(id) {  
+        console.log(id);
+        this.editing = id;
+      },
+      editRecipeOne(recipe){
+        console.log(recipe);
+        this.editRecipe(recipe)
+        this.editing = null;
+      },
+    },
+    computed: {
+        filteredRecipes: function() {
+            // console.log(recipe.title)
+            return this.recipes.filter(recipe => {
+                return (
+                    recipe.title.match(this.search) ||
+                    recipe.title.toLowerCase().match(this.search) ||
+                    recipe.title.toUpperCase().match(this.search)
+                );
+            });
         }
+    }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#delete{
-    color:crimson;
+#delete {
+    color: crimson;
     cursor: pointer;
 }
-#delete:hover{
-    transform: scale(1.2)
+#delete:hover {
+    transform: scale(1.2);
 }
 
 .wrapper {
@@ -118,8 +155,7 @@ export default {
 .recipeWrapper {
     display: flex;
     border-radius: 3px;
-    flex-direction: column
-    /* ändra skugga */;
+    flex-direction: column /* ändra skugga */;
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
     min-height: 130px;
     width: 800px;
